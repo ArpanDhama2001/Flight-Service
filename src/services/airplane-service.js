@@ -70,4 +70,36 @@ async function destroyAirplane(id) {
     }
 }
 
-module.exports = { createAirplane, getAirplanes, getAirplane, destroyAirplane };
+async function updateAirplane(id, data) {
+    try {
+        const airplane = await airplaneRepository.update(id, data);
+        return airplane;
+    } catch (error) {
+        if (error.statusCode === 404) {
+            throw new AppError(
+                "Airplane to update not found",
+                StatusCodes.NOT_FOUND
+            );
+        }
+        if ((error.name = "SequelizeValidationError")) {
+            let explanation = [];
+            error.errors.forEach((e) => {
+                explanation.push(e.message);
+            });
+            throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+        }
+
+        throw new AppError(
+            "Cannot update the airplane object.",
+            StatusCodes.INTERNAL_SERVER_ERROR
+        );
+    }
+}
+
+module.exports = {
+    createAirplane,
+    getAirplanes,
+    getAirplane,
+    destroyAirplane,
+    updateAirplane,
+};
