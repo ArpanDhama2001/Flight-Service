@@ -18,6 +18,12 @@ class CrudRepository {
                 id: id,
             },
         });
+        if (!response) {
+            throw new AppError(
+                "Resourse to delete not found",
+                StatusCodes.NOT_FOUND
+            );
+        }
         return response;
     }
 

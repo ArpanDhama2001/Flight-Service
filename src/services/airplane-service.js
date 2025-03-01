@@ -52,4 +52,22 @@ async function getAirplane(id) {
     }
 }
 
-module.exports = { createAirplane, getAirplanes, getAirplane };
+async function destroyAirplane(id) {
+    try {
+        const airplane = airplaneRepository.destroy(id);
+        return airplane;
+    } catch (error) {
+        if (error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError(
+                "The airplane you requested to delete not found.",
+                StatusCodes.NOT_FOUND
+            );
+        }
+        throw new AppError(
+            "Cannot fetch data of the airplane.",
+            StatusCodes.INTERNAL_SERVER_ERROR
+        );
+    }
+}
+
+module.exports = { createAirplane, getAirplanes, getAirplane, destroyAirplane };
