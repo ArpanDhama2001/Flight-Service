@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const { AirplaneRepository } = require("../repositories");
 const AppError = require("../utils/errors/app-error");
-const airplaneRepository = new AirplaneRepository();
+const airplaneRepository = new AirplaneRepository(); // creating airplane model
 
 async function createAirplane(data) {
     try {
@@ -15,8 +15,23 @@ async function createAirplane(data) {
             });
             throw new AppError(explanation, StatusCodes.BAD_REQUEST);
         }
-        throw error;
+        throw new AppError(
+            "Cannot create a new airplane object.",
+            StatusCodes.INTERNAL_SERVER_ERROR
+        );
     }
 }
 
-module.exports = { createAirplane };
+async function getAirplanes() {
+    try {
+        const response = airplaneRepository.getAll();
+        return response;
+    } catch (error) {
+        throw new AppError(
+            "Cannot fetch data of all the airplanes.",
+            StatusCodes.INTERNAL_SERVER_ERROR
+        );
+    }
+}
+
+module.exports = { createAirplane, getAirplanes };
