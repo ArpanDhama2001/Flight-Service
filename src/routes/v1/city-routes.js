@@ -10,4 +10,7 @@ router.post(
     CityController.createCity
 );
 
+// /api/v1/cities -> Get
+router.get("/", CityController.getCities);
+
 module.exports = router;
