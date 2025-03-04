@@ -14,4 +14,16 @@ function validateCreateRequest(req, res, next) {
     next();
 }
 
-module.exports = { validateCreateRequest };
+function validateUpdateRequest(req, res, next) {
+    if (!req.body.name) {
+        ErrorResponse.message = "Something went wrong while updating City.";
+        ErrorResponse.error = new AppError(
+            ["name is not found in request body."],
+            StatusCodes.BAD_REQUEST
+        );
+        return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
+    }
+    next();
+}
+
+module.exports = { validateCreateRequest, validateUpdateRequest };
