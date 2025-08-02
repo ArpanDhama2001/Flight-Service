@@ -7,35 +7,37 @@ const { SuccessResponse, ErrorResponse } = require("../utils/common");
  * POST : /flights
  * req-body {
  *  flightNumber: 'UK 808',
- *  airplaneId: 'a380',
+ *  airplaneId: '5',
  *  departureAirportId: 'BLR',
  *  arrivalAirportId: 'DEL',
- *  arrivalTime: '11:10:00',
- *  departureTime: '9:10:00',
+ *  arrivalTime: '2025-08-15 11:10:00',
+ *  departureTime: '2025-08-15 7:10:00',
  *  price: 2000
  *  boardingGate: '12A',
  *  totalSeats: 120
  * }
  */
 async function createFlight(req, res) {
-    try {
-        const flight = await FlightService.createFlight({
-            flightNumber: req.body.flightNumber,
-            airplaneId: req.body.airplaneId,
-            departureAirportId: req.body.departureAirportId,
-            arrivalAirportId: req.body.arrivalAirportId,
-            arrivalTime: req.body.arrivalTime,
-            departureTime: req.body.departureTime,
-            price: req.body.price,
-            boardingGate: req.body.boardingGate,
-            totalSeats: req.body.totalSeats,
-        });
-        SuccessResponse.data = flight;
-        return res.status(StatusCodes.CREATED).json(SuccessResponse);
-    } catch (error) {
-        ErrorResponse.error = error;
-        return res.status(error.statusCode).json(ErrorResponse);
-    }
+  try {
+    const flight = await FlightService.createFlight({
+      flightNumber: req.body.flightNumber,
+      airplaneId: req.body.airplaneId,
+      departureAirportId: req.body.departureAirportId,
+      arrivalAirportId: req.body.arrivalAirportId,
+      arrivalTime: req.body.arrivalTime,
+      departureTime: req.body.departureTime,
+      price: req.body.price,
+      boardingGate: req.body.boardingGate,
+      totalSeats: req.body.totalSeats,
+    });
+    console.log("FLIGT-CONTROLLER:", req.body);
+    SuccessResponse.data = flight;
+    return res.status(StatusCodes.CREATED).json(SuccessResponse);
+  } catch (error) {
+    console.log("FLIGT-CONTROLLER:", error);
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
 }
 
 /**
@@ -44,14 +46,14 @@ async function createFlight(req, res) {
  */
 
 async function getAllFlights(req, res) {
-    try {
-        const flights = await FlightService.getAllFlights(req.query);
-        SuccessResponse.data = flights;
-        return res.status(StatusCodes.CREATED).json(SuccessResponse);
-    } catch (error) {
-        ErrorResponse.error = error;
-        return res.status(error.statusCode).json(ErrorResponse);
-    }
+  try {
+    const flights = await FlightService.getAllFlights(req.query);
+    SuccessResponse.data = flights;
+    return res.status(StatusCodes.CREATED).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
 }
 
 /**
@@ -59,14 +61,14 @@ async function getAllFlights(req, res) {
  * req-body {}
  */
 async function getFlight(req, res) {
-    try {
-        const flight = await FlightService.getFlight(req.params.id);
-        SuccessResponse.data = flight;
-        return res.status(StatusCodes.OK).json(SuccessResponse);
-    } catch (error) {
-        ErrorResponse.error = error;
-        return res.status(error.statusCode).json(ErrorResponse);
-    }
+  try {
+    const flight = await FlightService.getFlight(req.params.id);
+    SuccessResponse.data = flight;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
 }
 
 /**
@@ -78,24 +80,24 @@ async function getFlight(req, res) {
  */
 
 async function updateSeats(req, res) {
-    try {
-        console.log(req.body);
-        const response = await FlightService.updateSeats({
-            flightId: req.params.id,
-            seats: req.body.seats,
-            dec: req.body.dec,
-        });
-        SuccessResponse.data = response;
-        return res.status(StatusCodes.OK).json(SuccessResponse);
-    } catch (error) {
-        ErrorResponse.error = error;
-        return res.status(error.statusCode).json(ErrorResponse);
-    }
+  try {
+    console.log(req.body);
+    const response = await FlightService.updateSeats({
+      flightId: req.params.id,
+      seats: req.body.seats,
+      dec: req.body.dec,
+    });
+    SuccessResponse.data = response;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
 }
 
 module.exports = {
-    createFlight,
-    getAllFlights,
-    getFlight,
-    updateSeats,
+  createFlight,
+  getAllFlights,
+  getFlight,
+  updateSeats,
 };
