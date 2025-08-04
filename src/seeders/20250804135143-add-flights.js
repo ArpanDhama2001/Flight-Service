@@ -12,9 +12,9 @@ module.exports = {
     await queryInterface.bulkInsert("Flights", [
       {
         flightNumber: "UK 808",
-        airplaneId: "5",
+        airplaneId: "1",
         departureAirportId: "BLR",
-        arrivalAirportId: "IGI",
+        arrivalAirportId: "DEL",
         departureTime: now,
         arrivalTime: addHours(now, 4),
         price: 2000,
@@ -25,8 +25,8 @@ module.exports = {
       },
       {
         flightNumber: "AI 202",
-        airplaneId: "7",
-        departureAirportId: "IGI",
+        airplaneId: "2",
+        departureAirportId: "DEL",
         arrivalAirportId: "MUM",
         departureTime: addHours(now, 6),
         arrivalTime: addHours(now, 9),
@@ -38,7 +38,7 @@ module.exports = {
       },
       {
         flightNumber: "6E 305",
-        airplaneId: "8",
+        airplaneId: "3",
         departureAirportId: "MUM",
         arrivalAirportId: "LKO",
         departureTime: addHours(now, 12),
@@ -51,7 +51,7 @@ module.exports = {
       },
       {
         flightNumber: "SG 401",
-        airplaneId: "9",
+        airplaneId: "4",
         departureAirportId: "LKO",
         arrivalAirportId: "BLR",
         departureTime: addHours(now, 18),
@@ -64,7 +64,7 @@ module.exports = {
       },
       {
         flightNumber: "IX 555",
-        airplaneId: "10",
+        airplaneId: "5",
         departureAirportId: "BLR",
         arrivalAirportId: "MUM",
         departureTime: addHours(now, 24),
@@ -77,9 +77,9 @@ module.exports = {
       },
       {
         flightNumber: "QF 789",
-        airplaneId: "11",
+        airplaneId: "6",
         departureAirportId: "MUM",
-        arrivalAirportId: "IGI",
+        arrivalAirportId: "DEL",
         departureTime: addHours(now, 30),
         arrivalTime: addHours(now, 34),
         price: 2600,
@@ -90,8 +90,8 @@ module.exports = {
       },
       {
         flightNumber: "EK 123",
-        airplaneId: "12",
-        departureAirportId: "IGI",
+        airplaneId: "7",
+        departureAirportId: "DEL",
         arrivalAirportId: "LKO",
         departureTime: addHours(now, 36),
         arrivalTime: addHours(now, 42),
@@ -103,7 +103,7 @@ module.exports = {
       },
       {
         flightNumber: "LH 789",
-        airplaneId: "13",
+        airplaneId: "1",
         departureAirportId: "LKO",
         arrivalAirportId: "MUM",
         departureTime: addHours(now, 48),
