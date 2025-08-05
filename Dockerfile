@@ -1,16 +1,19 @@
 FROM node:18
 
-WORKDIR /app
+# Install netcat for connection testing and curl for health checks
+RUN apt-get update && apt-get install -y netcat-openbsd curl && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app/flight-service
 
 COPY package*.json ./
 RUN npm install
 
 COPY . .
 
-WORKDIR /app/src
+# Make entrypoint script executable
+RUN chmod +x entrypoint.sh
 
-RUN npx sequelize db:create || true
-RUN npx sequelize db:migrate
-RUN npx sequelize db:seed:all
+EXPOSE 3000
 
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["npm", "run", "dev"]
